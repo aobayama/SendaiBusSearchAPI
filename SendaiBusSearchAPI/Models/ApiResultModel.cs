@@ -12,7 +12,7 @@ namespace SendaiBusSearchAPI.Models
     {
 
         [JsonProperty("id")]
-        public string StationId { get; set; }
+        public int StationId { get; set; }
 
         [JsonProperty("name")]
         public string StationName { get; set; }
@@ -29,8 +29,11 @@ namespace SendaiBusSearchAPI.Models
         [JsonProperty("id")]
         public string BusId { get; set; }
 
+        [JsonProperty("line_key")]
+        public string LineKey { get; set; }
+    
         [JsonProperty("line_id")]
-        public string LineId { get; set; }
+        public int LineId { get; set; }
 
         [JsonProperty("line_name")]
         public string LineName { get; set; }
@@ -43,14 +46,17 @@ namespace SendaiBusSearchAPI.Models
     public class LineInfoResult
     {
 
+        [JsonProperty("key")]
+        public string LineKey { get; set; }
+
         [JsonProperty("id")]
-        public string LineId { get; set; }
+        public int LineId { get; set; }
 
         [JsonProperty("name")]
         public string LineName { get; set; }
 
         [JsonProperty("buses")]
-        public List<BusDayTypeInfo> Buses { get; set; }
+        public List<string> Buses { get; set; }
 
 
         [JsonProperty("stations")]
@@ -98,7 +104,7 @@ namespace SendaiBusSearchAPI.Models
         public Node ArrNode { get; set; }
 
         [JsonProperty("line")]
-        public IdNamePair Line { get; set; }
+        public string LineKey { get; set; }
 
         [JsonProperty("is_walk")]
         public bool IsWalk { get; set; }
@@ -124,10 +130,10 @@ namespace SendaiBusSearchAPI.Models
     {
 
         [JsonProperty("id")]
-        public string StationId { get; set; }
+        public int Id { get; set; }
 
         [JsonProperty("name")]
-        public string StationName { get; set; }
+        public string Name { get; set; }
 
     }
 
@@ -136,11 +142,14 @@ namespace SendaiBusSearchAPI.Models
         [JsonProperty("bus_id")]
         public string BusId { get; set; }
 
+        [JsonProperty("line_key")]
+        public string LineKey { get; set; }
+
         [JsonProperty("line_name")]
-        public string RouteName { get; set; }
+        public string LineName { get; set; }
 
         [JsonProperty("line_id")]
-        public string RouteId { get; set; }
+        public int LineId { get; set; }
 
         [JsonProperty("dept")]
         public string DeptTime { get; set; }

@@ -12,6 +12,9 @@ namespace SendaiBusSearchAPI.Models
     public static class DBModel
     {
 
+        private static JsonData dbData = null;
+
+
         public static void Initialize()
         {
 
@@ -21,24 +24,24 @@ namespace SendaiBusSearchAPI.Models
         static DBModel()
         {
             // データを読み込む
-            JsonData jsonData = null;
-
             string path = System.Web.HttpContext.Current.Server.MapPath("~/App_Data/bus_all.json");
 
             using (var fs = new FileStream(path, FileMode.Open))
                 using(var reader = new StreamReader(fs))
             {
                 var body = reader.ReadToEnd();
-                jsonData = JsonConvert.DeserializeObject<JsonData>(body);
-            }
-
-
-
-            Console.WriteLine(jsonData.Buses.Count);
-            
-
+                dbData = JsonConvert.DeserializeObject<JsonData>(body);
+            }            
 
         }
+
+
+        public static JsonData GetInstance()
+        {
+            return dbData;
+        }
+
+
 
     }
 }

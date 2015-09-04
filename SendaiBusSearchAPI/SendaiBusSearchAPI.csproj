@@ -154,6 +154,10 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\api\BusesController.cs" />
+    <Compile Include="Controllers\api\LinesController.cs" />
+    <Compile Include="Controllers\api\RouteController.cs" />
+    <Compile Include="Controllers\api\StationsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">

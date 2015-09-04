@@ -22,7 +22,7 @@ namespace SendaiBusSearchAPI.Models
     {
 
         [JsonProperty("stations")]
-        public Dictionary<string, Station> Stations { get; set; }
+        public Dictionary<int, Station> Stations { get; set; }
 
         [JsonProperty("lines")]
         public Lines Lines { get; set; }
@@ -56,6 +56,18 @@ namespace SendaiBusSearchAPI.Models
         [JsonProperty(Commons.HOLIDAY)]
         public Dictionary<string,Line> Holiday { get; set; }
 
+        public Dictionary<string,Line> GetDataFromDayType(string dayType)
+        {
+            switch (dayType)
+            {
+                case Commons.SATURDAY:
+                    return this.Saturday;
+                case Commons.HOLIDAY:
+                    return this.Holiday;
+                default:
+                    return this.Weekday;
+            }
+        }
     }
 
     public class Line
@@ -65,13 +77,13 @@ namespace SendaiBusSearchAPI.Models
         public string Name { get; set; }
 
         [JsonProperty("id")]
-        public string Id { get; set; }
+        public int Id { get; set; }
 
         [JsonProperty("buses")]
-        public List<BusDayTypeInfo> Buses { get; set; }
+        public List<string> Buses { get; set; }
 
         [JsonProperty("stations")]
-        public List<string> Stations { get; set; }
+        public List<int> Stations { get; set; }
 
     }
 
@@ -94,21 +106,10 @@ namespace SendaiBusSearchAPI.Models
     {
         
         [JsonProperty("station_id")]
-        public string StationId { get; set; }
+        public int StationId { get; set; }
         
         [JsonProperty("dept")]
         public string DeptTime { get; set; }
-
-    }
-
-
-    public class BusDayTypeInfo
-    {
-        [JsonProperty("bus_id")]
-        public string BusId { get; set; }
-
-        [JsonProperty("daytype")]
-        public string DayType { get; set; }
 
     }
 
