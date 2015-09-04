@@ -125,6 +125,19 @@ namespace SendaiBusSearchAPI.Models
 
     }
 
+    public class IdKeyNamePair
+    {
+
+        [JsonProperty("key")]
+        public string Key { get; set; }
+
+        [JsonProperty("id")]
+        public int Id { get; set; }
+
+        [JsonProperty("name")]
+        public string Name { get; set; }
+
+    }
 
     public class IdNamePair
     {

@@ -11,6 +11,7 @@ namespace SendaiBusSearchAPI.Controllers.api
     [RoutePrefix("api/lines")]
     public class LinesController : ApiController
     {
+        [Route("details")]
         public LineInfoResult GetDetailsData(string key, int daytype)
         {
             var instance = DBModel.GetInstance();
@@ -52,14 +53,55 @@ namespace SendaiBusSearchAPI.Controllers.api
 
         }
 
-        public List<string> GetLinesKeyFromId(int id, int daytype)
+        [Route("search_from_id")]
+        public List<IdKeyNamePair> GetLinesKeyFromId(int id, int daytype)
         {
+            var instance = DBModel.GetInstance();
+            Dictionary<string, Line> tempLineCollection = null;
 
+            switch (daytype)
+            {
+                case 0:
+                    tempLineCollection = instance.Lines.Weekday;
+                    break;
+                case 1:
+                    tempLineCollection = instance.Lines.Saturday;
+                    break;
+                case 2:
+                    tempLineCollection = instance.Lines.Holiday;
+                    break;
+                default:
+                    throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.BadRequest));
+            }
 
+            var temp = (from t in tempLineCollection where t.Value.Id == id select new IdKeyNamePair { Id = t.Value.Id, Key = t.Key, Name = t.Value.Name }).ToList();
+            return temp;
         }
 
+        [Route("search_from_name")]
+        public List<IdKeyNamePair> GetLinesKeyFromName(string name, int daytype)
+        {
+            var instance = DBModel.GetInstance();
+            Dictionary<string, Line> tempLineCollection = null;
 
+            switch (daytype)
+            {
+                case 0:
+                    tempLineCollection = instance.Lines.Weekday;
+                    break;
+                case 1:
+                    tempLineCollection = instance.Lines.Saturday;
+                    break;
+                case 2:
+                    tempLineCollection = instance.Lines.Holiday;
+                    break;
+                default:
+                    throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.BadRequest));
+            }
 
+            var temp = (from t in tempLineCollection where t.Value.Name.Contains(name) select new IdKeyNamePair() { Key = t.Key, Id = t.Value.Id, Name = t.Value.Name }).ToList();
+            return temp;
+        }
 
     }
 }

@@ -31,10 +31,8 @@ namespace SendaiBusSearchAPI.Models
             {
                 var body = reader.ReadToEnd();
                 dbData = JsonConvert.DeserializeObject<JsonData>(body);
-            }            
-
+            }
         }
-
 
         public static JsonData GetInstance()
         {

@@ -159,7 +159,6 @@
     <Compile Include="Controllers\api\RouteController.cs" />
     <Compile Include="Controllers\api\StationsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
