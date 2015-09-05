@@ -1,24 +1,21 @@
-﻿<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS, and JavaScript.</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+﻿@{
+    ViewBag.Title = "仙台市営バスデータAPI トップページ";
+}
+
+
+<div class="jumbotron">
+    <h1>仙台市営バスデータAPI</h1>
+    <p class="lead">仙台市営バスに関するデータを公開しています。の時刻表検索、路線検索、ルート検索を行うことができます。</p>
 </div>
 <div class="row">
     <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>ASP.NET Web API is a framework that makes it easy to build HTTP services that reach
-        a broad range of clients, including browsers and mobile devices. ASP.NET Web API
-        is an ideal platform for building RESTful applications on the .NET Framework.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301870">Learn more &raquo;</a></p>
+        <h2>利用量無料</h2>
+        <p>APIは無料で開放しております。ご自身のアプリケーション開発などにお役立てください。商用利用の場合は @Html.ActionLink("お問い合わせ", "Contact", "Home", new { area = "" }, null) まで必ずご連絡ください。<br />
+            その他ご意見ご感想、このWebAPを使って作成したアプリケーションのご報告も大歓迎です。（私が喜びます）</p>
     </div>
     <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301871">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301872">Learn more &raquo;</a></p>
+        <h2>データセット</h2>
+        <p>このサイトで用いているデータはGitHubで公開しています。</p>
+        <p><a class="btn btn-default" href="https://github.com/aobayama/sendaibus_dataset" target="_blank">Go &raquo;</a></p>
     </div>
 </div>

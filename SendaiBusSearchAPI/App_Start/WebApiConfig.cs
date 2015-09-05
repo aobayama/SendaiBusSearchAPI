@@ -11,7 +11,11 @@ namespace SendaiBusSearchAPI
         {
             // Web API の設定およびサービス
 
+            config.EnableCors();
+
             // Web API ルート
+
+
             config.MapHttpAttributeRoutes();
 
             config.Routes.MapHttpRoute(

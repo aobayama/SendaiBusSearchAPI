@@ -66,9 +66,15 @@ namespace SendaiBusSearchAPI.Models
 
     public class RouteSearchResult
     {
+        [JsonProperty("from")]
+        public IdNamePair FromStation { get; set; }
 
+        [JsonProperty("to")]
+        public IdNamePair ToStation { get; set; }
 
-
+        [JsonProperty("routes")]
+        public List<Route> Routes { get; set; }
+        
     }
 
     public class Route
@@ -84,7 +90,7 @@ namespace SendaiBusSearchAPI.Models
         public string TotalTime { get; set; }
 
         [JsonProperty("transfer_count")]
-        public string TransferCount { get; set; }
+        public int TransferCount { get; set; }
 
         [JsonProperty("cost")]
         public double Cost { get; set; }
@@ -106,9 +112,12 @@ namespace SendaiBusSearchAPI.Models
         [JsonProperty("line")]
         public string LineKey { get; set; }
 
+        [JsonProperty("bus_id")]
+        public string BusId { get; set; }
+
         [JsonProperty("is_walk")]
         public bool IsWalk { get; set; }
-
+        
         [JsonProperty("time")]
         public string Time { get; set; }
 

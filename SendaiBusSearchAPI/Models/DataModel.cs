@@ -16,6 +16,61 @@ namespace SendaiBusSearchAPI.Models
 
         public const string HOLIDAY = "holiday";
 
+        const string DATETIMEPATTERN = @"yyyy/MM/dd HH\:mm\:ss";
+
+        const string TIMESPANPATTERN = @"hh\:mm";
+
+        public static DateTime ConvertToDateTime(string value)
+        {
+            DateTime parsedDate;
+            if (DateTime.TryParse(value, out parsedDate))
+            {
+                return parsedDate;
+            }
+            else
+            {
+                return new DateTime();
+            }
+        }
+
+        public static TimeSpan ConvertToTimeSpan(string value)
+        {
+            TimeSpan parsedDate;
+            if (TimeSpan.TryParse(value, out parsedDate))
+            {
+                return parsedDate;
+            }
+            else
+            {
+                return new TimeSpan();
+            }
+        }
+
+
+        public static string ConvertToString(DateTime value)
+        {
+            return value.ToString(DATETIMEPATTERN);
+        }
+
+        public static string ConvertToString(TimeSpan value)
+        {
+            return value.ToString(TIMESPANPATTERN);
+        }
+
+
+        public static TimeSpan DiffTimespan(TimeSpan value1, TimeSpan value2)
+        {
+            if (value1 < value2)
+            {
+                return (value2 - value1);
+            }
+            else
+            {
+                return (value1 - value2);
+            }
+        }
+
+
     }
 
     public class JsonData

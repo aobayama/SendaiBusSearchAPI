@@ -5,12 +5,15 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace SendaiBusSearchAPI.Controllers.api
 {
     [RoutePrefix("api/stations")]
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class StationsController : ApiController
     {
+        [HttpGet()]
         [Route("details")]
         public StationInfoResult GetDetailsData(int id)
         {
@@ -42,6 +45,7 @@ namespace SendaiBusSearchAPI.Controllers.api
             return result;
         }
 
+        [HttpGet()]
         [Route("search")]
         public List<IdNamePair> SearchStationId(string name)
         {

@@ -5,12 +5,15 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace SendaiBusSearchAPI.Controllers.api
 {
     [RoutePrefix("api/lines")]
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class LinesController : ApiController
     {
+        [HttpGet()]
         [Route("details")]
         public LineInfoResult GetDetailsData(string key, int daytype)
         {
@@ -53,6 +56,7 @@ namespace SendaiBusSearchAPI.Controllers.api
 
         }
 
+        [HttpGet()]
         [Route("search_from_id")]
         public List<IdKeyNamePair> GetLinesKeyFromId(int id, int daytype)
         {
@@ -78,6 +82,7 @@ namespace SendaiBusSearchAPI.Controllers.api
             return temp;
         }
 
+        [HttpGet()]
         [Route("search_from_name")]
         public List<IdKeyNamePair> GetLinesKeyFromName(string name, int daytype)
         {
