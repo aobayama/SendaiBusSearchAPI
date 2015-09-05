@@ -42,7 +42,7 @@ namespace SendaiBusSearchAPI.Models
             }
             else
             {
-                return new TimeSpan();
+                return TimeSpan.Zero;
             }
         }
 
