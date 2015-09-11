@@ -534,9 +534,10 @@
             <param name="from">出発駅IDを指定します。</param>
             <param name="to">目的駅IDを指定します。</param>
             <param name="daytype">運行日を指定します。</param>
-            <param name="method">（オプション）経路検索の検索方法を指定します。</param>
-            <param name="queryTime">（オプション）時刻検索に用いる時間を指定します。</param>
+            <param name="method">（オプション）経路検索の検索方法を指定します。省略された場合は現在時刻が指定されます。</param>
+            <param name="queryTime">（オプション）時刻検索に用いる時間を指定します。省略された場合は発時刻検索が指定されます。</param>
             <param name="count">（オプション）ルート提示最大数を指定します。</param>
+            <remarks>queryTimeを指定しなかった場合、methodは強制的に発時刻検索が指定されます。</remarks>
             <returns></returns>
         </member>
         <member name="M:SendaiBusSearchAPI.Controllers.api.RouteController.SearchRoute(System.String,System.String,SendaiBusSearchAPI.Models.DayType)">

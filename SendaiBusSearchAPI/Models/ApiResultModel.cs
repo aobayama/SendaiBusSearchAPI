@@ -126,6 +126,24 @@ namespace SendaiBusSearchAPI.Models
         public StationIdNamePair ToStation { get; set; }
 
         /// <summary>
+        /// 検索条件として指定された時間を示します。
+        /// </summary>
+        [JsonProperty("query_time")]
+        public string QueryTime { get; set; }
+
+        /// <summary>
+        /// 検索条件として指定された運行日を示します。
+        /// </summary>
+        [JsonProperty("query_daytype")]
+        public DayType QueryDayType { get; set; }
+
+        /// <summary>
+        /// 検索条件として指定された、経路検索の検索方法を示します。
+        /// </summary>
+        [JsonProperty("query_method")]
+        public RouteSeachMethod QueryMethod { get; set; }
+
+        /// <summary>
         /// 経路一覧情報を示します。
         /// </summary>
         [JsonProperty("routes")]

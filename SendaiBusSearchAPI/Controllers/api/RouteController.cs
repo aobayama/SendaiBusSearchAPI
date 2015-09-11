@@ -23,9 +23,9 @@ namespace SendaiBusSearchAPI.Controllers.api
         /// <param name="from">出発駅IDを指定します。</param>
         /// <param name="to">目的駅IDを指定します。</param>
         /// <param name="daytype">運行日を指定します。</param>
-        /// <param name="method">（オプション）経路検索の検索方法を指定します。</param>
-        /// <param name="queryTime">（オプション）時刻検索に用いる時間を指定します。</param>
-        /// <param name="count">（オプション）ルート提示最大数を指定します。</param>
+        /// <param name="method">（オプション）経路検索の検索方法を指定します。省略された場合は発時刻検索が指定されます。queryTimeを指定しなかった場合、methodは強制的に発時刻検索が指定されます。</param>
+        /// <param name="queryTime">（オプション）時刻検索に用いる時間を指定します。(hh:mm)省略された場合は現在時刻が指定されます。</param>
+        /// <param name="count">（オプション）検索結果の最大数を指定します。</param>
         /// <returns></returns>
         [HttpGet()]
         [Route("search")]
@@ -72,7 +72,7 @@ namespace SendaiBusSearchAPI.Controllers.api
             else
             {
                 // 着検索 -> toの発車時刻がクエリとして与えられた時刻よりも古い
-                tempSource = toStation.Buses.Where(c => c.DayType == daytype && Commons.ConvertToTimeSpan(c.DeptTime) >= baseTime)
+                tempSource = toStation.Buses.Where(c => c.DayType == daytype && Commons.ConvertToTimeSpan(c.DeptTime) <= baseTime)
                     .Join(fromStation.Buses, t => t.BusId, f => f.BusId, (t, f) => new Tuple<BusDeptTimeInfo, BusDeptTimeInfo>(f, t));
             }
 
@@ -124,7 +124,7 @@ namespace SendaiBusSearchAPI.Controllers.api
                               let arrTime = Commons.ConvertToTimeSpan(route.Item2.DeptTime)
                               let costTime = Commons.DiffTimespan(deptTime, arrTime)
                               orderby costTime descending // 2番目のクエリ：所要時間 (3番目のクエリ：TransferCount)
-                              orderby deptTime ascending  // 1番目のクエリ：到着時間が近い順
+                              orderby deptTime descending  // 1番目のクエリ：到着時間が近い順
                               let costTimeStr = Commons.ConvertToString(costTime)
                               select new Route()
                               {
