@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -46,7 +47,6 @@ namespace SendaiBusSearchAPI.Models
             }
         }
 
-
         public static string ConvertToString(DateTime value)
         {
             return value.ToString(DATETIMEPATTERN);
@@ -77,7 +77,7 @@ namespace SendaiBusSearchAPI.Models
     {
 
         [JsonProperty("stations")]
-        public Dictionary<int, Station> Stations { get; set; }
+        public Dictionary<string, Station> Stations { get; set; }
 
         [JsonProperty("lines")]
         public Lines Lines { get; set; }
@@ -111,18 +111,19 @@ namespace SendaiBusSearchAPI.Models
         [JsonProperty(Commons.HOLIDAY)]
         public Dictionary<string,Line> Holiday { get; set; }
 
-        public Dictionary<string,Line> GetDataFromDayType(string dayType)
+        public Dictionary<string, Line> GetDataFromDayType(DayType dayType)
         {
             switch (dayType)
             {
-                case Commons.SATURDAY:
+                case DayType.saturday:
                     return this.Saturday;
-                case Commons.HOLIDAY:
+                case DayType.holiday:
                     return this.Holiday;
                 default:
                     return this.Weekday;
             }
         }
+
     }
 
     public class Line
@@ -131,38 +132,46 @@ namespace SendaiBusSearchAPI.Models
         [JsonProperty("name")]
         public string Name { get; set; }
 
-        [JsonProperty("id")]
-        public int Id { get; set; }
+        [JsonProperty("number")]
+        public int Number { get; set; }
 
         [JsonProperty("buses")]
         public List<string> Buses { get; set; }
 
         [JsonProperty("stations")]
-        public List<int> Stations { get; set; }
+        public List<string> Stations { get; set; }
 
     }
 
     public class Bus
     {
-
+        [JsonConverter(typeof(StringEnumConverter))]
         [JsonProperty("daytype")]
-        public string DayType { get; set; }
+        public DayType DayType { get; set; }
 
-        [JsonProperty("line_key")]
-        public string LineKey { get; set; }
+        [JsonProperty("line_id")]
+        public string LineId { get; set; }
 
         [JsonProperty("dept_times")]
         public List<StationsDeptInfo> DeptTimes { get; set; }
-
+        
     }
 
     
+    /// <summary>
+    /// 駅出発時刻情報を示します。
+    /// </summary>
     public class StationsDeptInfo
     {
-        
+        /// <summary>
+        /// 駅IDを示します。
+        /// </summary>
         [JsonProperty("station_id")]
-        public int StationId { get; set; }
-        
+        public string StationId { get; set; }
+
+        /// <summary>
+        /// 発車時刻を示します。
+        /// </summary>
         [JsonProperty("dept")]
         public string DeptTime { get; set; }
 
@@ -177,8 +186,9 @@ namespace SendaiBusSearchAPI.Models
         [JsonProperty("dept")]
         public string DeptTime { get; set; }
 
+        [JsonConverter(typeof(StringEnumConverter))]
         [JsonProperty("daytype")]
-        public string DayType { get; set; }
+        public DayType DayType { get; set; }
 
     }
 

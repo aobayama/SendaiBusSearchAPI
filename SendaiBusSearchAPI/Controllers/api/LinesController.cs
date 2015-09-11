@@ -9,102 +9,76 @@ using System.Web.Http.Cors;
 
 namespace SendaiBusSearchAPI.Controllers.api
 {
+    /// <summary>
+    /// 路線情報に関するAPIを提供します。
+    /// </summary>
     [RoutePrefix("api/lines")]
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class LinesController : ApiController
     {
+        /// <summary>
+        /// 路線詳細情報を検索します。
+        /// </summary>
+        /// <param name="id">一意の路線IDを指定します。</param>
+        /// <param name="daytype">運行日を指定します。</param>
+        /// <returns></returns>
         [HttpGet()]
         [Route("details")]
-        public LineInfoResult GetDetailsData(string key, int daytype)
+        public LineInfoResult GetDetailsData(string id, DayType daytype)
         {
             var instance = DBModel.GetInstance();
-            Dictionary<string, Line> tempLineCollection = null;
+            Dictionary<string, Line> tempLineCollection = instance.Lines.GetDataFromDayType(daytype);
             
-            switch (daytype)
-            {
-                case 0:
-                    tempLineCollection = instance.Lines.Weekday;
-                    break;
-                case 1:
-                    tempLineCollection = instance.Lines.Saturday;
-                    break;
-                case 2:
-                    tempLineCollection = instance.Lines.Holiday;
-                    break;
-                default:
-                    throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.BadRequest));
-            }
-
-            if (!tempLineCollection.ContainsKey(key))
+            if (!tempLineCollection.ContainsKey(id))
             {
                 throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotFound));
             }
 
 
-            var tempLine = tempLineCollection[key];
+            var tempLine = tempLineCollection[id];
 
             var result = new LineInfoResult()
             {
-                LineKey = key,
-                LineId = tempLine.Id,
+                LineId = id,
+                LineNumber = tempLine.Number,
                 LineName = tempLine.Name,
                 Buses = tempLine.Buses,
-                Stations = (from sta in tempLine.Stations select new IdNamePair() { Id = sta, Name = instance.Stations[sta].Name }).ToList()
+                Stations = (from sta in tempLine.Stations select new StationIdNamePair() { Id = sta, Name = instance.Stations[sta].Name }).ToList()
             };
 
             return result;
 
         }
 
+        /// <summary>
+        /// 路線番号から路線IDを検索します。
+        /// </summary>
+        /// <param name="number">路線番号を指定します。</param>
+        /// <param name="daytype">運行日を指定します。</param>
+        /// <returns></returns>
         [HttpGet()]
-        [Route("search_from_id")]
-        public List<IdKeyNamePair> GetLinesKeyFromId(int id, int daytype)
+        [Route("search_from_number")]
+        public List<LineNameInfo> GetLineIdsFromNumber(int number, DayType daytype)
         {
             var instance = DBModel.GetInstance();
-            Dictionary<string, Line> tempLineCollection = null;
-
-            switch (daytype)
-            {
-                case 0:
-                    tempLineCollection = instance.Lines.Weekday;
-                    break;
-                case 1:
-                    tempLineCollection = instance.Lines.Saturday;
-                    break;
-                case 2:
-                    tempLineCollection = instance.Lines.Holiday;
-                    break;
-                default:
-                    throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.BadRequest));
-            }
-
-            var temp = (from t in tempLineCollection where t.Value.Id == id select new IdKeyNamePair { Id = t.Value.Id, Key = t.Key, Name = t.Value.Name }).ToList();
+            Dictionary<string, Line> tempLineCollection = instance.Lines.GetDataFromDayType(daytype);
+            var temp = (from t in tempLineCollection where t.Value.Number == number select new LineNameInfo { Number = t.Value.Number, Id = t.Key, Name = t.Value.Name }).ToList();
             return temp;
         }
 
+        /// <summary>
+        /// 路線名から路線IDを検索します。
+        /// </summary>
+        /// <param name="name">路線名を指定します。</param>
+        /// <param name="daytype">運行日を指定します。</param>
+        /// <returns></returns>
         [HttpGet()]
         [Route("search_from_name")]
-        public List<IdKeyNamePair> GetLinesKeyFromName(string name, int daytype)
+        public List<LineNameInfo> GetLinesKeyFromName(string name, DayType daytype)
         {
             var instance = DBModel.GetInstance();
-            Dictionary<string, Line> tempLineCollection = null;
-
-            switch (daytype)
-            {
-                case 0:
-                    tempLineCollection = instance.Lines.Weekday;
-                    break;
-                case 1:
-                    tempLineCollection = instance.Lines.Saturday;
-                    break;
-                case 2:
-                    tempLineCollection = instance.Lines.Holiday;
-                    break;
-                default:
-                    throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.BadRequest));
-            }
-
-            var temp = (from t in tempLineCollection where t.Value.Name.Contains(name) select new IdKeyNamePair() { Key = t.Key, Id = t.Value.Id, Name = t.Value.Name }).ToList();
+            Dictionary<string, Line> tempLineCollection = instance.Lines.GetDataFromDayType(daytype);
+            var temp = (from t in tempLineCollection where t.Value.Name.Contains(name) select new LineNameInfo() { Id = t.Key, Number = t.Value.Number, Name = t.Value.Name }).ToList();
             return temp;
         }
 

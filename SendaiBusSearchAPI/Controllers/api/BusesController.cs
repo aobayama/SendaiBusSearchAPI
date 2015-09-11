@@ -9,11 +9,19 @@ using System.Web.Http.Cors;
 
 namespace SendaiBusSearchAPI.Controllers.api
 {
+    /// <summary>
+    /// バス情報に関するAPIを提供します。
+    /// </summary>
     [RoutePrefix("api/buses")]
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class BusesController : ApiController
     {
 
+        /// <summary>
+        /// バス詳細情報を検索します。
+        /// </summary>
+        /// <param name="id">一意のバスIDを指定します。</param>
+        /// <returns></returns>
         [HttpGet()]
         [Route("details")]
         public BusInfoResult GetDetailsData(string id)
@@ -25,15 +33,14 @@ namespace SendaiBusSearchAPI.Controllers.api
             }
 
             var temp = instance.Buses[id];
-            var tempLine = instance.Lines.GetDataFromDayType(temp.DayType)[temp.LineKey];
+            var tempLine = instance.Lines.GetDataFromDayType(temp.DayType)[temp.LineId];
             
-
             var result = new BusInfoResult()
             {
                 BusId = id,
-                LineKey = temp.LineKey,
+                LineId = temp.LineId,
                 DeptTimes = temp.DeptTimes,
-                LineId = tempLine.Id,
+                LineNumber = tempLine.Number,
                 LineName = tempLine.Name
             };
 

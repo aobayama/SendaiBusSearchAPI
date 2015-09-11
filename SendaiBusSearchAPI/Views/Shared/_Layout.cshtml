@@ -33,7 +33,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - <a href="http://aobayama.net/" target="_blank">aobayama.net</a> / <a href="http://bonprosoft.com" target="_blank">Yuki IGARASHI</a></p>
+            <p>&copy; @DateTime.Now.Year - <a href="http://aobayama.net/" target="_blank">aobayama.net</a> / @Html.ActionLink("Team #yami", "Contact", "Home", new { area = "" }, null)</p>
         </footer>
     </div>
 

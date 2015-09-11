@@ -19,10 +19,9 @@ namespace SendaiBusSearchAPI.Models
 
         public static void Initialize()
         {
-
+            return;
         }
-
-
+        
         static DBModel()
         {
             var temp = ConfigurationManager.AppSettings["datapath"];
