@@ -43,7 +43,7 @@ namespace SendaiBusSearchAPI.Controllers.api
                 LineNumber = tempLine.Number,
                 LineName = tempLine.Name,
                 Buses = tempLine.Buses,
-                Stations = (from sta in tempLine.Stations select new StationIdNamePair() { Id = sta, Name = instance.Stations[sta].Name }).ToList()
+                Stations = (from sta in tempLine.Stations let staTemp = instance.Stations[sta] select new StationIdNamePair() { Id = sta, Name = staTemp.Name, Yomi = staTemp.Yomi }).ToList()
             };
 
             return result;

@@ -58,8 +58,8 @@ namespace SendaiBusSearchAPI.Controllers.api
 
             var result = new RouteSearchResult()
             {
-                FromStation = new StationIdNamePair() { Id = from, Name = fromStation.Name },
-                ToStation = new StationIdNamePair() { Id = to, Name = toStation.Name }
+                FromStation = new StationIdNamePair() { Id = from, Name = fromStation.Name, Yomi = fromStation.Yomi },
+                ToStation = new StationIdNamePair() { Id = to, Name = toStation.Name, Yomi = toStation.Yomi }
             };
             
             IEnumerable<Tuple<BusDeptTimeInfo, BusDeptTimeInfo>> tempSource = null;
@@ -186,8 +186,8 @@ namespace SendaiBusSearchAPI.Controllers.api
 
             var result = new RouteSearchResult()
             {
-                FromStation = new StationIdNamePair() { Id = from, Name = fromStation.Name },
-                ToStation = new StationIdNamePair() { Id = to, Name = toStation.Name }
+                FromStation = new StationIdNamePair() { Id = from, Name = fromStation.Name, Yomi = fromStation.Yomi },
+                ToStation = new StationIdNamePair() { Id = to, Name = toStation.Name, Yomi = toStation.Yomi }
             };
 
 

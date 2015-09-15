@@ -92,12 +92,37 @@ namespace SendaiBusSearchAPI.Models
 
         [JsonProperty("name")]
         public string Name { get; set; }
+        
+        [JsonProperty("coord")]
+        public Coordinate Coord { get; set; }
 
+        [JsonProperty("yomi")]
+        public string Yomi { get; set; }
 
         [JsonProperty("buses")]
         public List<BusDeptTimeInfo> Buses { get; set; }
-
+        
     }
+
+    /// <summary>
+    /// 座標を示します。
+    /// </summary>
+    public class Coordinate
+    {
+
+        /// <summary>
+        /// 経度を示します。
+        /// </summary>
+        [JsonProperty("lon")]
+        public double longitude { get; set; }
+
+        /// <summary>
+        /// 緯度を示します。
+        /// </summary>
+        [JsonProperty("lat")]
+        public double latitude { get; set; }
+    }
+
 
 
     public class Lines

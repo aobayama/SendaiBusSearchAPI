@@ -25,10 +25,23 @@ namespace SendaiBusSearchAPI.Models
         public string StationName { get; set; }
 
         /// <summary>
+        /// 駅名の読みを示します。
+        /// </summary>
+        [JsonProperty("yomi")]
+        public string StationYomi { get; set; }
+
+        /// <summary>
         /// この駅から発車するバス一覧を示します。
         /// </summary>
         [JsonProperty("timetable")]
         public List<BusDeptTimeInfoWithLineName> Buses { get; set; }
+
+        /// <summary>
+        /// この駅の位置情報を示します。
+        /// </summary>
+        [JsonProperty("coord")]
+        public Coordinate Coordinates { get; set; }
+
 
     }
 
@@ -230,6 +243,73 @@ namespace SendaiBusSearchAPI.Models
     }
 
     /// <summary>
+    /// 駅の基本情報を示します。
+    /// </summary>
+    public class StationBasicInfo
+    {
+
+        /// <summary>
+        /// 駅のIDと名前情報を示します。
+        /// </summary>
+        [JsonProperty("idname")]
+        public StationIdNamePair IdName { get; set; }
+
+        /// <summary>
+        /// この駅の位置情報を示します。
+        /// </summary>
+        [JsonProperty("coord")]
+        public Coordinate Coordinates { get; set; }
+
+    }
+
+    /// <summary>
+    /// 駅の概要情報を示します。
+    /// </summary>
+    public class StationSummaryInfo
+    {
+        /// <summary>
+        /// 駅の基本情報を示します。
+        /// </summary>
+        [JsonProperty("basic_info")]
+        public StationBasicInfo BasicInfo { get; set; }
+
+        /// <summary>
+        /// この駅を通る路線情報を示します。
+        /// </summary>
+        [JsonProperty("lines")]
+        public LinesList Lines { get; set; }
+
+    }
+
+    /// <summary>
+    /// 路線一覧情報を示します。
+    /// </summary>
+    public class LinesList
+    {
+
+        /// <summary>
+        /// 平日の路線一覧情報を示します。
+        /// </summary>
+        [JsonProperty("weekday")]
+        public List<LineNameInfo> Weekday { get; set; }
+
+        /// <summary>
+        /// 土曜の路線一覧情報を示します。
+        /// </summary>
+        [JsonProperty("saturday")]
+        public List<LineNameInfo> Saturday { get; set; }
+
+        /// <summary>
+        /// 休日の路線一覧情報を示します。
+        /// </summary>
+        [JsonProperty("holiday")]
+        public List<LineNameInfo> Holiday { get; set; }
+
+
+    }
+
+
+    /// <summary>
     /// 移動手順を示します。
     /// </summary>
     public class Path
@@ -350,6 +430,12 @@ namespace SendaiBusSearchAPI.Models
         /// </summary>
         [JsonProperty("id")]
         public string Id { get; set; }
+        
+        /// <summary>
+        /// 駅の読みを示します。
+        /// </summary>
+        [JsonProperty("yomi")]
+        public string Yomi { get; set; }
 
         /// <summary>
         /// 駅名を示します。
