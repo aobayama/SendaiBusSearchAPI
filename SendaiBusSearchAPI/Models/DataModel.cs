@@ -178,25 +178,36 @@ namespace SendaiBusSearchAPI.Models
         public string LineId { get; set; }
 
         [JsonProperty("dept_times")]
-        public List<StationsDeptInfo> DeptTimes { get; set; }
+        public List<StationsDept> DeptTimes { get; set; }
         
     }
 
-    
     /// <summary>
     /// 駅出発時刻情報を示します。
     /// </summary>
     public class StationsDeptInfo
     {
         /// <summary>
-        /// 駅IDを示します。
+        /// 駅情報を示します。
         /// </summary>
-        [JsonProperty("station_id")]
-        public string StationId { get; set; }
+        [JsonProperty("station")]
+        public StationIdNamePair Station { get; set; }
 
         /// <summary>
         /// 発車時刻を示します。
         /// </summary>
+        [JsonProperty("dept")]
+        public string DeptTime { get; set; }
+
+    }
+
+
+    public class StationsDept
+    {
+
+        [JsonProperty("station_id")]
+        public string StationId { get; set; }
+
         [JsonProperty("dept")]
         public string DeptTime { get; set; }
 

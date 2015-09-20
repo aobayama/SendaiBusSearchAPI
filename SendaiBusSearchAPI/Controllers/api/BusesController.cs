@@ -39,7 +39,11 @@ namespace SendaiBusSearchAPI.Controllers.api
             {
                 BusId = id,
                 LineId = temp.LineId,
-                DeptTimes = temp.DeptTimes,
+                DeptTimes = (from t in temp.DeptTimes let st = instance.Stations[t.StationId] select new StationsDeptInfo()
+                {
+                    Station = new StationIdNamePair() { Id = t.StationId, Name = st.Name, Yomi = st.Yomi },
+                    DeptTime = t.DeptTime
+                }).ToList(),
                 LineNumber = tempLine.Number,
                 LineName = tempLine.Name
             };
