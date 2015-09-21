@@ -1,4 +1,5 @@
 ﻿using SendaiBusSearchAPI.Models;
+using SendaiBusSearchAPI.Models.Base;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -79,6 +80,21 @@ namespace SendaiBusSearchAPI.Controllers.api
             var instance = DBModel.GetInstance();
             Dictionary<string, Line> tempLineCollection = instance.Lines.GetDataFromDayType(daytype);
             var temp = (from t in tempLineCollection where t.Value.Name.Contains(name) select new LineNameInfo() { Id = t.Key, Number = t.Value.Number, Name = t.Value.Name }).ToList();
+            return temp;
+        }
+
+        /// <summary>
+        /// 路線一覧情報を検索します。
+        /// </summary>
+        /// <param name="daytype">運行日を指定します。</param>
+        /// <returns></returns>
+        [HttpGet()]
+        [ActionName("list")]
+        public virtual List<LineNameInfo> GetListLineFromName(DayType daytype)
+        {
+            var instance = DBModel.GetInstance();
+            Dictionary<string, Line> tempLineCollection = instance.Lines.GetDataFromDayType(daytype);
+            var temp = (from t in tempLineCollection select new LineNameInfo() { Id = t.Key, Number = t.Value.Number, Name = t.Value.Name }).ToList();
             return temp;
         }
 

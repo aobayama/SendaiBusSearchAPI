@@ -498,7 +498,7 @@
             路線情報に関するAPIを提供します。
             </summary>
         </member>
-        <member name="M:SendaiBusSearchAPI.Controllers.api.LinesControllerBase.GetDetailsData(System.String,SendaiBusSearchAPI.Models.DayType)">
+        <member name="M:SendaiBusSearchAPI.Controllers.api.LinesControllerBase.GetDetailsData(System.String,SendaiBusSearchAPI.Models.Base.DayType)">
             <summary>
             路線詳細情報を検索します。
             </summary>
@@ -506,7 +506,7 @@
             <param name="daytype">運行日を指定します。</param>
             <returns></returns>
         </member>
-        <member name="M:SendaiBusSearchAPI.Controllers.api.LinesControllerBase.GetLineIdsFromNumber(System.Int32,SendaiBusSearchAPI.Models.DayType)">
+        <member name="M:SendaiBusSearchAPI.Controllers.api.LinesControllerBase.GetLineIdsFromNumber(System.Int32,SendaiBusSearchAPI.Models.Base.DayType)">
             <summary>
             路線番号から路線IDを検索します。
             </summary>
@@ -514,11 +514,18 @@
             <param name="daytype">運行日を指定します。</param>
             <returns></returns>
         </member>
-        <member name="M:SendaiBusSearchAPI.Controllers.api.LinesControllerBase.GetLinesKeyFromName(System.String,SendaiBusSearchAPI.Models.DayType)">
+        <member name="M:SendaiBusSearchAPI.Controllers.api.LinesControllerBase.GetLinesKeyFromName(System.String,SendaiBusSearchAPI.Models.Base.DayType)">
             <summary>
             路線名から路線IDを検索します。
             </summary>
             <param name="name">路線名を指定します。</param>
+            <param name="daytype">運行日を指定します。</param>
+            <returns></returns>
+        </member>
+        <member name="M:SendaiBusSearchAPI.Controllers.api.LinesControllerBase.GetListLineFromName(SendaiBusSearchAPI.Models.Base.DayType)">
+            <summary>
+            路線一覧情報を検索します。
+            </summary>
             <param name="daytype">運行日を指定します。</param>
             <returns></returns>
         </member>
@@ -527,7 +534,7 @@
             経路検索に関するAPIを提供します。
             </summary>
         </member>
-        <member name="M:SendaiBusSearchAPI.Controllers.api.RouteControllerBase.SearchRoute(System.String,System.String,SendaiBusSearchAPI.Models.DayType,SendaiBusSearchAPI.Models.RouteSeachMethod,System.String,System.Int32)">
+        <member name="M:SendaiBusSearchAPI.Controllers.api.RouteControllerBase.SearchRoute(System.String,System.String,SendaiBusSearchAPI.Models.Base.DayType,SendaiBusSearchAPI.Models.Base.RouteSeachMethod,System.String,System.Int32)">
             <summary>
             指定された駅間のルートを検索します。
             </summary>
@@ -539,7 +546,7 @@
             <param name="count">（オプション）検索結果の最大数を指定します。</param>
             <returns></returns>
         </member>
-        <member name="M:SendaiBusSearchAPI.Controllers.api.RouteControllerBase.SearchRoute(System.String,System.String,SendaiBusSearchAPI.Models.DayType)">
+        <member name="M:SendaiBusSearchAPI.Controllers.api.RouteControllerBase.SearchRoute(System.String,System.String,SendaiBusSearchAPI.Models.Base.DayType)">
             <summary>
             指定された駅間の全ルートを検索します。
             </summary>
@@ -581,403 +588,397 @@
             <param name="name">駅名を指定します。</param>
             <returns></returns>
         </member>
-        <member name="M:SendaiBusSearchAPI.Controllers.api.Version1_2.StationsController.GetAllBasicData">
-            <summary>
-            俺がv1.2だ！！！（Document Override OK)
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="T:SendaiBusSearchAPI.Models.StationInfoResult">
+        <member name="T:SendaiBusSearchAPI.Models.Base.StationInfoResult">
             <summary>
             駅情報を示します。
             </summary>
         </member>
-        <member name="P:SendaiBusSearchAPI.Models.StationInfoResult.StationId">
+        <member name="P:SendaiBusSearchAPI.Models.Base.StationInfoResult.StationId">
             <summary>
             駅IDを示します。このIDはすべての駅に一意に割り当てられます。
             </summary>
         </member>
-        <member name="P:SendaiBusSearchAPI.Models.StationInfoResult.StationName">
+        <member name="P:SendaiBusSearchAPI.Models.Base.StationInfoResult.StationName">
             <summary>
             駅名を示します。
             </summary>
         </member>
-        <member name="P:SendaiBusSearchAPI.Models.StationInfoResult.StationYomi">
+        <member name="P:SendaiBusSearchAPI.Models.Base.StationInfoResult.StationYomi">
             <summary>
             駅名の読みを示します。
             </summary>
         </member>
-        <member name="P:SendaiBusSearchAPI.Models.StationInfoResult.Buses">
+        <member name="P:SendaiBusSearchAPI.Models.Base.StationInfoResult.Buses">
             <summary>
             この駅から発車するバス一覧を示します。
             </summary>
         </member>
-        <member name="P:SendaiBusSearchAPI.Models.StationInfoResult.Coordinates">
+        <member name="P:SendaiBusSearchAPI.Models.Base.StationInfoResult.Coordinates">
             <summary>
             この駅の位置情報を示します。
             </summary>
         </member>
-        <member name="T:SendaiBusSearchAPI.Models.BusInfoResult">
+        <member name="T:SendaiBusSearchAPI.Models.Base.BusInfoResult">
             <summary>
             バス情報を示します。
             </summary>
         </member>
-        <member name="P:SendaiBusSearchAPI.Models.BusInfoResult.BusId">
+        <member name="P:SendaiBusSearchAPI.Models.Base.BusInfoResult.BusId">
             <summary>
             バスIDを示します。このIDはすべてのバスに一意に割り当てられます。
             </summary>
         </member>
-        <member name="P:SendaiBusSearchAPI.Models.BusInfoResult.LineId">
+        <member name="P:SendaiBusSearchAPI.Models.Base.BusInfoResult.LineId">
             <summary>
             路線IDを示します。
             </summary>
         </member>
-        <member name="P:SendaiBusSearchAPI.Models.BusInfoResult.LineNumber">
+        <member name="P:SendaiBusSearchAPI.Models.Base.BusInfoResult.LineNumber">
             <summary>
             路線番号を示します。
             </summary>
         </member>
-        <member name="P:SendaiBusSearchAPI.Models.BusInfoResult.LineName">
+        <member name="P:SendaiBusSearchAPI.Models.Base.BusInfoResult.LineName">
             <summary>
             路線名を示します。
             </summary>
         </member>
-        <member name="P:SendaiBusSearchAPI.Models.BusInfoResult.DeptTimes">
+        <member name="P:SendaiBusSearchAPI.Models.Base.BusInfoResult.DeptTimes">
             <summary>
             このバスの停車駅一覧とその時刻を示します。
             </summary>
         </member>
-        <member name="T:SendaiBusSearchAPI.Models.LineInfoResult">
+        <member name="T:SendaiBusSearchAPI.Models.Base.LineInfoResult">
             <summary>
             路線情報を示します。
             </summary>
         </member>
-        <member name="P:SendaiBusSearchAPI.Models.LineInfoResult.LineId">
+        <member name="P:SendaiBusSearchAPI.Models.Base.LineInfoResult.LineId">
             <summary>
             路線IDを示します。このIDはすべての路線に一意に割り当てられます。
             </summary>
         </member>
-        <member name="P:SendaiBusSearchAPI.Models.LineInfoResult.LineNumber">
+        <member name="P:SendaiBusSearchAPI.Models.Base.LineInfoResult.LineNumber">
             <summary>
             路線番号を示します。
             </summary>
         </member>
-        <member name="P:SendaiBusSearchAPI.Models.LineInfoResult.LineName">
+        <member name="P:SendaiBusSearchAPI.Models.Base.LineInfoResult.LineName">
             <summary>
             路線名を示します。
             </summary>
         </member>
-        <member name="P:SendaiBusSearchAPI.Models.LineInfoResult.Buses">
+        <member name="P:SendaiBusSearchAPI.Models.Base.LineInfoResult.Buses">
             <summary>
             この路線に含まれるバスIDの一覧を示します。
             </summary>
         </member>
-        <member name="P:SendaiBusSearchAPI.Models.LineInfoResult.Stations">
+        <member name="P:SendaiBusSearchAPI.Models.Base.LineInfoResult.Stations">
             <summary>
             この路線に含まれる駅IDの一覧を示します。
             </summary>
         </member>
-        <member name="T:SendaiBusSearchAPI.Models.RouteSearchResult">
+        <member name="T:SendaiBusSearchAPI.Models.Base.RouteSearchResult">
             <summary>
             経路検索情報を示します。
             </summary>
         </member>
-        <member name="P:SendaiBusSearchAPI.Models.RouteSearchResult.FromStation">
+        <member name="P:SendaiBusSearchAPI.Models.Base.RouteSearchResult.FromStation">
             <summary>
             出発駅を示します。
             </summary>
         </member>
-        <member name="P:SendaiBusSearchAPI.Models.RouteSearchResult.ToStation">
+        <member name="P:SendaiBusSearchAPI.Models.Base.RouteSearchResult.ToStation">
             <summary>
             到着駅を示します。
             </summary>
         </member>
-        <member name="P:SendaiBusSearchAPI.Models.RouteSearchResult.QueryTime">
+        <member name="P:SendaiBusSearchAPI.Models.Base.RouteSearchResult.QueryTime">
             <summary>
             検索条件として指定された時間を示します。
             </summary>
         </member>
-        <member name="P:SendaiBusSearchAPI.Models.RouteSearchResult.QueryDayType">
+        <member name="P:SendaiBusSearchAPI.Models.Base.RouteSearchResult.QueryDayType">
             <summary>
             検索条件として指定された運行日を示します。
             </summary>
         </member>
-        <member name="P:SendaiBusSearchAPI.Models.RouteSearchResult.QueryMethod">
+        <member name="P:SendaiBusSearchAPI.Models.Base.RouteSearchResult.QueryMethod">
             <summary>
             検索条件として指定された、経路検索の検索方法を示します。
             </summary>
         </member>
-        <member name="P:SendaiBusSearchAPI.Models.RouteSearchResult.Routes">
+        <member name="P:SendaiBusSearchAPI.Models.Base.RouteSearchResult.Routes">
             <summary>
             経路一覧情報を示します。
             </summary>
         </member>
-        <member name="T:SendaiBusSearchAPI.Models.RouteSeachMethod">
+        <member name="T:SendaiBusSearchAPI.Models.Base.RouteSeachMethod">
             <summary>
             経路検索の検索方法を示します。
             </summary>
         </member>
-        <member name="F:SendaiBusSearchAPI.Models.RouteSeachMethod.DepartureBase">
+        <member name="F:SendaiBusSearchAPI.Models.Base.RouteSeachMethod.DepartureBase">
             <summary>
             出発時刻をもとに検索します。
             </summary>
         </member>
-        <member name="F:SendaiBusSearchAPI.Models.RouteSeachMethod.ArrivalBase">
+        <member name="F:SendaiBusSearchAPI.Models.Base.RouteSeachMethod.ArrivalBase">
             <summary>
             到着時刻をもとに検索します。
             </summary>
         </member>
-        <member name="T:SendaiBusSearchAPI.Models.DayType">
+        <member name="T:SendaiBusSearchAPI.Models.Base.DayType">
             <summary>
             運行日を示します。
             </summary>
         </member>
-        <member name="F:SendaiBusSearchAPI.Models.DayType.weekday">
+        <member name="F:SendaiBusSearchAPI.Models.Base.DayType.weekday">
             <summary>
             平日を示します。
             </summary>
         </member>
-        <member name="F:SendaiBusSearchAPI.Models.DayType.saturday">
+        <member name="F:SendaiBusSearchAPI.Models.Base.DayType.saturday">
             <summary>
             土曜日を示します。
             </summary>
         </member>
-        <member name="F:SendaiBusSearchAPI.Models.DayType.holiday">
+        <member name="F:SendaiBusSearchAPI.Models.Base.DayType.holiday">
             <summary>
             休日を示します。
             </summary>
         </member>
-        <member name="T:SendaiBusSearchAPI.Models.Route">
+        <member name="T:SendaiBusSearchAPI.Models.Base.Route">
             <summary>
             経路情報を示します。
             </summary>
         </member>
-        <member name="P:SendaiBusSearchAPI.Models.Route.TotalDeptTime">
+        <member name="P:SendaiBusSearchAPI.Models.Base.Route.TotalDeptTime">
             <summary>
             出発時間を示します。
             </summary>
         </member>
-        <member name="P:SendaiBusSearchAPI.Models.Route.TotalArrTime">
+        <member name="P:SendaiBusSearchAPI.Models.Base.Route.TotalArrTime">
             <summary>
             到着時間を示します。
             </summary>
         </member>
-        <member name="P:SendaiBusSearchAPI.Models.Route.TotalTime">
+        <member name="P:SendaiBusSearchAPI.Models.Base.Route.TotalTime">
             <summary>
             総移動時間を示します。
             </summary>
         </member>
-        <member name="P:SendaiBusSearchAPI.Models.Route.TransferCount">
+        <member name="P:SendaiBusSearchAPI.Models.Base.Route.TransferCount">
             <summary>
             乗り換え回数を示します。
             </summary>
         </member>
-        <member name="P:SendaiBusSearchAPI.Models.Route.Rank">
+        <member name="P:SendaiBusSearchAPI.Models.Base.Route.Rank">
             <summary>
             経路の提示順位を示します。
             </summary>
         </member>
-        <member name="P:SendaiBusSearchAPI.Models.Route.Pathes">
+        <member name="P:SendaiBusSearchAPI.Models.Base.Route.Pathes">
             <summary>
             経路の詳細情報（移動手順一覧）を示します。
             </summary>
         </member>
-        <member name="T:SendaiBusSearchAPI.Models.StationBasicInfo">
+        <member name="T:SendaiBusSearchAPI.Models.Base.StationBasicInfo">
             <summary>
             駅の基本情報を示します。
             </summary>
         </member>
-        <member name="P:SendaiBusSearchAPI.Models.StationBasicInfo.IdName">
+        <member name="P:SendaiBusSearchAPI.Models.Base.StationBasicInfo.IdName">
             <summary>
             駅のIDと名前情報を示します。
             </summary>
         </member>
-        <member name="P:SendaiBusSearchAPI.Models.StationBasicInfo.Coordinates">
+        <member name="P:SendaiBusSearchAPI.Models.Base.StationBasicInfo.Coordinates">
             <summary>
             この駅の位置情報を示します。
             </summary>
         </member>
-        <member name="T:SendaiBusSearchAPI.Models.StationSummaryInfo">
+        <member name="T:SendaiBusSearchAPI.Models.Base.StationSummaryInfo">
             <summary>
             駅の概要情報を示します。
             </summary>
         </member>
-        <member name="P:SendaiBusSearchAPI.Models.StationSummaryInfo.BasicInfo">
+        <member name="P:SendaiBusSearchAPI.Models.Base.StationSummaryInfo.BasicInfo">
             <summary>
             駅の基本情報を示します。
             </summary>
         </member>
-        <member name="P:SendaiBusSearchAPI.Models.StationSummaryInfo.Lines">
+        <member name="P:SendaiBusSearchAPI.Models.Base.StationSummaryInfo.Lines">
             <summary>
             この駅を通る路線情報を示します。
             </summary>
         </member>
-        <member name="T:SendaiBusSearchAPI.Models.LinesList">
+        <member name="T:SendaiBusSearchAPI.Models.Base.LinesList">
             <summary>
             路線一覧情報を示します。
             </summary>
         </member>
-        <member name="P:SendaiBusSearchAPI.Models.LinesList.Weekday">
+        <member name="P:SendaiBusSearchAPI.Models.Base.LinesList.Weekday">
             <summary>
             平日の路線一覧情報を示します。
             </summary>
         </member>
-        <member name="P:SendaiBusSearchAPI.Models.LinesList.Saturday">
+        <member name="P:SendaiBusSearchAPI.Models.Base.LinesList.Saturday">
             <summary>
             土曜の路線一覧情報を示します。
             </summary>
         </member>
-        <member name="P:SendaiBusSearchAPI.Models.LinesList.Holiday">
+        <member name="P:SendaiBusSearchAPI.Models.Base.LinesList.Holiday">
             <summary>
             休日の路線一覧情報を示します。
             </summary>
         </member>
-        <member name="T:SendaiBusSearchAPI.Models.Path">
+        <member name="T:SendaiBusSearchAPI.Models.Base.Path">
             <summary>
             移動手順を示します。
             </summary>
         </member>
-        <member name="P:SendaiBusSearchAPI.Models.Path.DeptNode">
+        <member name="P:SendaiBusSearchAPI.Models.Base.Path.DeptNode">
             <summary>
             出発点を示します。
             </summary>
         </member>
-        <member name="P:SendaiBusSearchAPI.Models.Path.ArrNode">
+        <member name="P:SendaiBusSearchAPI.Models.Base.Path.ArrNode">
             <summary>
             到着点を示します。
             </summary>
         </member>
-        <member name="P:SendaiBusSearchAPI.Models.Path.Line">
+        <member name="P:SendaiBusSearchAPI.Models.Base.Path.Line">
             <summary>
             使用する路線IDを示します。
             </summary>
         </member>
-        <member name="P:SendaiBusSearchAPI.Models.Path.BusId">
+        <member name="P:SendaiBusSearchAPI.Models.Base.Path.BusId">
             <summary>
             使用するバスIDを示します。
             </summary>
         </member>
-        <member name="P:SendaiBusSearchAPI.Models.Path.Method">
+        <member name="P:SendaiBusSearchAPI.Models.Base.Path.Method">
             <summary>
             徒歩であるかを示します。
             </summary>
         </member>
-        <member name="P:SendaiBusSearchAPI.Models.Path.Time">
+        <member name="P:SendaiBusSearchAPI.Models.Base.Path.Time">
             <summary>
             所要時間を示します。
             </summary>
         </member>
-        <member name="T:SendaiBusSearchAPI.Models.TransferMethod">
+        <member name="T:SendaiBusSearchAPI.Models.Base.TransferMethod">
             <summary>
             移動手段を示します。
             </summary>
         </member>
-        <member name="F:SendaiBusSearchAPI.Models.TransferMethod.Walk">
+        <member name="F:SendaiBusSearchAPI.Models.Base.TransferMethod.Walk">
             <summary>
             徒歩を示します。
             </summary>
         </member>
-        <member name="F:SendaiBusSearchAPI.Models.TransferMethod.Bus">
+        <member name="F:SendaiBusSearchAPI.Models.Base.TransferMethod.Bus">
             <summary>
             バスを示します。
             </summary>
         </member>
-        <member name="F:SendaiBusSearchAPI.Models.TransferMethod.JR">
+        <member name="F:SendaiBusSearchAPI.Models.Base.TransferMethod.JR">
             <summary>
             JR線を示します。
             </summary>
         </member>
-        <member name="F:SendaiBusSearchAPI.Models.TransferMethod.Subway">
+        <member name="F:SendaiBusSearchAPI.Models.Base.TransferMethod.Subway">
             <summary>
             地下鉄を示します。
             </summary>
         </member>
-        <member name="T:SendaiBusSearchAPI.Models.Node">
+        <member name="T:SendaiBusSearchAPI.Models.Base.Node">
             <summary>
             地点情報を示します。
             </summary>
         </member>
-        <member name="P:SendaiBusSearchAPI.Models.Node.Time">
+        <member name="P:SendaiBusSearchAPI.Models.Base.Node.Time">
             <summary>
             出発/到着時間を示します。
             </summary>
         </member>
-        <member name="P:SendaiBusSearchAPI.Models.Node.Station">
+        <member name="P:SendaiBusSearchAPI.Models.Base.Node.Station">
             <summary>
             出発/到着駅情報を示します。
             </summary>
         </member>
-        <member name="T:SendaiBusSearchAPI.Models.LineNameInfo">
+        <member name="T:SendaiBusSearchAPI.Models.Base.LineNameInfo">
             <summary>
             簡易的な路線情報を示します。
             </summary>
         </member>
-        <member name="P:SendaiBusSearchAPI.Models.LineNameInfo.Id">
+        <member name="P:SendaiBusSearchAPI.Models.Base.LineNameInfo.Id">
             <summary>
             路線IDを示します。
             </summary>
         </member>
-        <member name="P:SendaiBusSearchAPI.Models.LineNameInfo.Number">
+        <member name="P:SendaiBusSearchAPI.Models.Base.LineNameInfo.Number">
             <summary>
             路線番号を示します。
             </summary>
         </member>
-        <member name="P:SendaiBusSearchAPI.Models.LineNameInfo.Name">
+        <member name="P:SendaiBusSearchAPI.Models.Base.LineNameInfo.Name">
             <summary>
             路線名を示します。
             </summary>
         </member>
-        <member name="T:SendaiBusSearchAPI.Models.StationIdNamePair">
+        <member name="T:SendaiBusSearchAPI.Models.Base.StationIdNamePair">
             <summary>
             簡易的な駅情報を示します。
             </summary>
         </member>
-        <member name="P:SendaiBusSearchAPI.Models.StationIdNamePair.Id">
+        <member name="P:SendaiBusSearchAPI.Models.Base.StationIdNamePair.Id">
             <summary>
             駅IDを示します。
             </summary>
         </member>
-        <member name="P:SendaiBusSearchAPI.Models.StationIdNamePair.Yomi">
+        <member name="P:SendaiBusSearchAPI.Models.Base.StationIdNamePair.Yomi">
             <summary>
             駅の読みを示します。
             </summary>
         </member>
-        <member name="P:SendaiBusSearchAPI.Models.StationIdNamePair.Name">
+        <member name="P:SendaiBusSearchAPI.Models.Base.StationIdNamePair.Name">
             <summary>
             駅名を示します。
             </summary>
         </member>
-        <member name="T:SendaiBusSearchAPI.Models.BusDeptTimeInfoWithLineName">
+        <member name="T:SendaiBusSearchAPI.Models.Base.BusDeptTimeInfoWithLineName">
             <summary>
             バスの出発時刻とその路線名を示します。
             </summary>
         </member>
-        <member name="P:SendaiBusSearchAPI.Models.BusDeptTimeInfoWithLineName.BusId">
+        <member name="P:SendaiBusSearchAPI.Models.Base.BusDeptTimeInfoWithLineName.BusId">
             <summary>
             バスIDを示します
             </summary>
         </member>
-        <member name="P:SendaiBusSearchAPI.Models.BusDeptTimeInfoWithLineName.LineId">
+        <member name="P:SendaiBusSearchAPI.Models.Base.BusDeptTimeInfoWithLineName.LineId">
             <summary>
             路線IDを示します。
             </summary>
         </member>
-        <member name="P:SendaiBusSearchAPI.Models.BusDeptTimeInfoWithLineName.LineName">
+        <member name="P:SendaiBusSearchAPI.Models.Base.BusDeptTimeInfoWithLineName.LineName">
             <summary>
             路線名を示します。
             </summary>
         </member>
-        <member name="P:SendaiBusSearchAPI.Models.BusDeptTimeInfoWithLineName.LineNumber">
+        <member name="P:SendaiBusSearchAPI.Models.Base.BusDeptTimeInfoWithLineName.LineNumber">
             <summary>
             路線番号を示します。
             </summary>
         </member>
-        <member name="P:SendaiBusSearchAPI.Models.BusDeptTimeInfoWithLineName.DeptTime">
+        <member name="P:SendaiBusSearchAPI.Models.Base.BusDeptTimeInfoWithLineName.DeptTime">
             <summary>
             出発時刻を示します。
             </summary>
         </member>
-        <member name="P:SendaiBusSearchAPI.Models.BusDeptTimeInfoWithLineName.DayType">
+        <member name="P:SendaiBusSearchAPI.Models.Base.BusDeptTimeInfoWithLineName.DayType">
             <summary>
             運行日を示します。
             </summary>

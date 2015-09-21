@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SendaiBusSearchAPI.Models
+namespace SendaiBusSearchAPI.Models.Base
 {
     /// <summary>
     /// 駅情報を示します。

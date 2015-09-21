@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using SendaiBusSearchAPI.Models;
+using SendaiBusSearchAPI.Models.Base;
 using System.Web.Http.Cors;
 
 namespace SendaiBusSearchAPI.Controllers.api

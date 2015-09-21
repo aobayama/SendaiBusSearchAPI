@@ -2,6 +2,7 @@
 using Newtonsoft.Json.Converters;
 using System;
 using System.Collections.Generic;
+using SendaiBusSearchAPI.Models.Base;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
