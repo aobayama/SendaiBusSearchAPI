@@ -83,14 +83,17 @@ namespace SendaiBusSearchAPI.Controllers.api
             var tempRoute = (from busSet in tempSource
                               let bus = instance.Buses[busSet.Item1.BusId]
                               let line = instance.Lines.GetDataFromDayType(daytype)[bus.LineId]
-                              where line.Stations.IndexOf(@from) < line.Stations.IndexOf(to) select new Tuple<BusDeptTimeInfo,BusDeptTimeInfo,Bus,Line>(busSet.Item1,busSet.Item2, bus, line));
+                              where line.Stations.IndexOf(@from) < line.Stations.LastIndexOf(to) select new Tuple<BusDeptTimeInfo,BusDeptTimeInfo,Bus,Line>(busSet.Item1,busSet.Item2, bus, line));
+            // -> 最初から見つかったもの と 最後に見つかったものを比較すれば、最低でも行けることは保証（最短かどうかは除いて） *1
 
             // 提案コスト検索
             IEnumerable<Route> tempResult = null;
             if (method == RouteSeachMethod.DepartureBase)
             {
                 tempResult = (from route in tempRoute
-                                   let deptTime = Commons.ConvertToTimeSpan(route.Item1.DeptTime) let arrTime = Commons.ConvertToTimeSpan(route.Item2.DeptTime)
+                                   let deptTime = Commons.ConvertToTimeSpan(route.Item1.DeptTime)
+                                   let arrTime = Commons.ConvertToTimeSpan(route.Item2.DeptTime)
+                                   where deptTime <= arrTime // *1の個所では最初と最後をとったが、このDeptInfoが必ず順序が保証されているとは限らない(*1は路線情報で判断)
                                    let costTime = Commons.DiffTimespan(deptTime, arrTime)
                                    orderby costTime descending // 2番目のクエリ：所要時間 (3番目のクエリ：TransferCount)
                                    orderby deptTime ascending  // 1番目のクエリ：到着時間が近い順
@@ -125,6 +128,7 @@ namespace SendaiBusSearchAPI.Controllers.api
                 tempResult = (from route in tempRoute
                               let deptTime = Commons.ConvertToTimeSpan(route.Item1.DeptTime)
                               let arrTime = Commons.ConvertToTimeSpan(route.Item2.DeptTime)
+                              where deptTime <= arrTime // *1の個所では最初と最後をとったが、このDeptInfoが必ず順序が保証されているとは限らない(*1は路線情報で判断)
                               let costTime = Commons.DiffTimespan(deptTime, arrTime)
                               orderby costTime descending // 2番目のクエリ：所要時間 (3番目のクエリ：TransferCount)
                               orderby deptTime descending  // 1番目のクエリ：到着時間が近い順
@@ -200,8 +204,11 @@ namespace SendaiBusSearchAPI.Controllers.api
                                 .Join(toStation.Buses, f => f.BusId, t => t.BusId, (f, t) => new { From = f, To = t })
                              let bus = instance.Buses[busSet.From.BusId]
                              let line = instance.Lines.GetDataFromDayType(daytype)[bus.LineId]
-                             where line.Stations.IndexOf(@from) < line.Stations.IndexOf(to)
-                             let time = Commons.ConvertToString(Commons.DiffTimespan(Commons.ConvertToTimeSpan(busSet.From.DeptTime), Commons.ConvertToTimeSpan(busSet.To.DeptTime)))
+                             where line.Stations.IndexOf(@from) < line.Stations.LastIndexOf(to)
+                             let dept = Commons.ConvertToTimeSpan(busSet.From.DeptTime)
+                             let arr = Commons.ConvertToTimeSpan(busSet.To.DeptTime)
+                             where dept <= arr
+                             let time = Commons.ConvertToString(Commons.DiffTimespan(dept, arr))
                              select new Route()
                              {
                                  Pathes = new List<Path>()
