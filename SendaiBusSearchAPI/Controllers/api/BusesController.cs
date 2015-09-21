@@ -12,9 +12,9 @@ namespace SendaiBusSearchAPI.Controllers.api
     /// <summary>
     /// バス情報に関するAPIを提供します。
     /// </summary>
-    [RoutePrefix("api/buses")]
+    [Route("buses")]
     [EnableCors(origins: "*", headers: "*", methods: "*")]
-    public class BusesController : ApiController
+    public class BusesControllerBase : ApiController
     {
 
         /// <summary>
@@ -23,7 +23,7 @@ namespace SendaiBusSearchAPI.Controllers.api
         /// <param name="id">一意のバスIDを指定します。</param>
         /// <returns></returns>
         [HttpGet()]
-        [Route("details")]
+        [ActionName("details")]
         public BusInfoResult GetDetailsData(string id)
         {
             var instance = DBModel.GetInstance();

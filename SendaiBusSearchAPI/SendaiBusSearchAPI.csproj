@@ -51,6 +51,10 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="SDammann.WebApi.Versioning, Version=2.7.0.0, Culture=neutral, PublicKeyToken=8e49016fcaf923da, processorArchitecture=MSIL">
+      <HintPath>..\packages\SDammann.WebApi.Versioning.2.7.0.0\lib\net45\SDammann.WebApi.Versioning.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -168,6 +172,10 @@
     <Compile Include="Controllers\api\LinesController.cs" />
     <Compile Include="Controllers\api\RouteController.cs" />
     <Compile Include="Controllers\api\StationsController.cs" />
+    <Compile Include="Controllers\api\Version1\BusesController.cs" />
+    <Compile Include="Controllers\api\Version1\LinesController.cs" />
+    <Compile Include="Controllers\api\Version1\RouteController.cs" />
+    <Compile Include="Controllers\api\Version1\StationsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

@@ -481,24 +481,24 @@
             </summary>
             <param name="documentPath">The physical path to XML document.</param>
         </member>
-        <member name="T:SendaiBusSearchAPI.Controllers.api.BusesController">
+        <member name="T:SendaiBusSearchAPI.Controllers.api.BusesControllerBase">
             <summary>
             バス情報に関するAPIを提供します。
             </summary>
         </member>
-        <member name="M:SendaiBusSearchAPI.Controllers.api.BusesController.GetDetailsData(System.String)">
+        <member name="M:SendaiBusSearchAPI.Controllers.api.BusesControllerBase.GetDetailsData(System.String)">
             <summary>
             バス詳細情報を検索します。
             </summary>
             <param name="id">一意のバスIDを指定します。</param>
             <returns></returns>
         </member>
-        <member name="T:SendaiBusSearchAPI.Controllers.api.LinesController">
+        <member name="T:SendaiBusSearchAPI.Controllers.api.LinesControllerBase">
             <summary>
             路線情報に関するAPIを提供します。
             </summary>
         </member>
-        <member name="M:SendaiBusSearchAPI.Controllers.api.LinesController.GetDetailsData(System.String,SendaiBusSearchAPI.Models.DayType)">
+        <member name="M:SendaiBusSearchAPI.Controllers.api.LinesControllerBase.GetDetailsData(System.String,SendaiBusSearchAPI.Models.DayType)">
             <summary>
             路線詳細情報を検索します。
             </summary>
@@ -506,7 +506,7 @@
             <param name="daytype">運行日を指定します。</param>
             <returns></returns>
         </member>
-        <member name="M:SendaiBusSearchAPI.Controllers.api.LinesController.GetLineIdsFromNumber(System.Int32,SendaiBusSearchAPI.Models.DayType)">
+        <member name="M:SendaiBusSearchAPI.Controllers.api.LinesControllerBase.GetLineIdsFromNumber(System.Int32,SendaiBusSearchAPI.Models.DayType)">
             <summary>
             路線番号から路線IDを検索します。
             </summary>
@@ -514,7 +514,7 @@
             <param name="daytype">運行日を指定します。</param>
             <returns></returns>
         </member>
-        <member name="M:SendaiBusSearchAPI.Controllers.api.LinesController.GetLinesKeyFromName(System.String,SendaiBusSearchAPI.Models.DayType)">
+        <member name="M:SendaiBusSearchAPI.Controllers.api.LinesControllerBase.GetLinesKeyFromName(System.String,SendaiBusSearchAPI.Models.DayType)">
             <summary>
             路線名から路線IDを検索します。
             </summary>
@@ -522,12 +522,12 @@
             <param name="daytype">運行日を指定します。</param>
             <returns></returns>
         </member>
-        <member name="T:SendaiBusSearchAPI.Controllers.api.RouteController">
+        <member name="T:SendaiBusSearchAPI.Controllers.api.RouteControllerBase">
             <summary>
             経路検索に関するAPIを提供します。
             </summary>
         </member>
-        <member name="M:SendaiBusSearchAPI.Controllers.api.RouteController.SearchRoute(System.String,System.String,SendaiBusSearchAPI.Models.DayType,SendaiBusSearchAPI.Models.RouteSeachMethod,System.String,System.Int32)">
+        <member name="M:SendaiBusSearchAPI.Controllers.api.RouteControllerBase.SearchRoute(System.String,System.String,SendaiBusSearchAPI.Models.DayType,SendaiBusSearchAPI.Models.RouteSeachMethod,System.String,System.Int32)">
             <summary>
             指定された駅間のルートを検索します。
             </summary>
@@ -539,7 +539,7 @@
             <param name="count">（オプション）検索結果の最大数を指定します。</param>
             <returns></returns>
         </member>
-        <member name="M:SendaiBusSearchAPI.Controllers.api.RouteController.SearchRoute(System.String,System.String,SendaiBusSearchAPI.Models.DayType)">
+        <member name="M:SendaiBusSearchAPI.Controllers.api.RouteControllerBase.SearchRoute(System.String,System.String,SendaiBusSearchAPI.Models.DayType)">
             <summary>
             指定された駅間の全ルートを検索します。
             </summary>
@@ -548,12 +548,12 @@
             <param name="daytype">運行日を指定します。</param>
             <returns></returns>
         </member>
-        <member name="T:SendaiBusSearchAPI.Controllers.api.StationsController">
+        <member name="T:SendaiBusSearchAPI.Controllers.api.StationsControllerBase">
             <summary>
             駅情報に関するAPIを提供します。
             </summary>
         </member>
-        <member name="M:SendaiBusSearchAPI.Controllers.api.StationsController.GetDetailsData(System.String,System.String)">
+        <member name="M:SendaiBusSearchAPI.Controllers.api.StationsControllerBase.GetDetailsData(System.String,System.String)">
             <summary>
             駅詳細情報を検索します。
             </summary>
@@ -561,24 +561,30 @@
             <param name="line_id">（オプション）一意の路線IDを指定して、時刻表データを制限します。</param>
             <returns></returns>
         </member>
-        <member name="M:SendaiBusSearchAPI.Controllers.api.StationsController.GetSummaryData(System.String)">
+        <member name="M:SendaiBusSearchAPI.Controllers.api.StationsControllerBase.GetSummaryData(System.String)">
             <summary>
             駅概要情報を検索します。
             </summary>
             <param name="id">一意の駅IDを指定します。</param>
             <returns></returns>
         </member>
-        <member name="M:SendaiBusSearchAPI.Controllers.api.StationsController.GetAllBasicData">
+        <member name="M:SendaiBusSearchAPI.Controllers.api.StationsControllerBase.GetAllBasicData">
             <summary>
             すべての駅の基本情報を取得します。
             </summary>
             <returns></returns>
         </member>
-        <member name="M:SendaiBusSearchAPI.Controllers.api.StationsController.SearchStationId(System.String)">
+        <member name="M:SendaiBusSearchAPI.Controllers.api.StationsControllerBase.SearchStationId(System.String)">
             <summary>
             名前または読みから駅IDを検索します。
             </summary>
             <param name="name">駅名を指定します。</param>
+            <returns></returns>
+        </member>
+        <member name="M:SendaiBusSearchAPI.Controllers.api.Version1_2.StationsController.GetAllBasicData">
+            <summary>
+            俺がv1.2だ！！！（Document Override OK)
+            </summary>
             <returns></returns>
         </member>
         <member name="T:SendaiBusSearchAPI.Models.StationInfoResult">

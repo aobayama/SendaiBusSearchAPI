@@ -12,9 +12,9 @@ namespace SendaiBusSearchAPI.Controllers.api
     /// <summary>
     /// 路線情報に関するAPIを提供します。
     /// </summary>
-    [RoutePrefix("api/lines")]
+    [Route("lines")]
     [EnableCors(origins: "*", headers: "*", methods: "*")]
-    public class LinesController : ApiController
+    public class LinesControllerBase : ApiController
     {
         /// <summary>
         /// 路線詳細情報を検索します。
@@ -23,8 +23,8 @@ namespace SendaiBusSearchAPI.Controllers.api
         /// <param name="daytype">運行日を指定します。</param>
         /// <returns></returns>
         [HttpGet()]
-        [Route("details")]
-        public LineInfoResult GetDetailsData(string id, DayType daytype)
+        [ActionName("details")]
+        public virtual LineInfoResult GetDetailsData(string id, DayType daytype)
         {
             var instance = DBModel.GetInstance();
             Dictionary<string, Line> tempLineCollection = instance.Lines.GetDataFromDayType(daytype);
@@ -57,8 +57,8 @@ namespace SendaiBusSearchAPI.Controllers.api
         /// <param name="daytype">運行日を指定します。</param>
         /// <returns></returns>
         [HttpGet()]
-        [Route("search_from_number")]
-        public List<LineNameInfo> GetLineIdsFromNumber(int number, DayType daytype)
+        [ActionName("search_from_number")]
+        public virtual List<LineNameInfo> GetLineIdsFromNumber(int number, DayType daytype)
         {
             var instance = DBModel.GetInstance();
             Dictionary<string, Line> tempLineCollection = instance.Lines.GetDataFromDayType(daytype);
@@ -73,8 +73,8 @@ namespace SendaiBusSearchAPI.Controllers.api
         /// <param name="daytype">運行日を指定します。</param>
         /// <returns></returns>
         [HttpGet()]
-        [Route("search_from_name")]
-        public List<LineNameInfo> GetLinesKeyFromName(string name, DayType daytype)
+        [ActionName("search_from_name")]
+        public virtual List<LineNameInfo> GetLinesKeyFromName(string name, DayType daytype)
         {
             var instance = DBModel.GetInstance();
             Dictionary<string, Line> tempLineCollection = instance.Lines.GetDataFromDayType(daytype);

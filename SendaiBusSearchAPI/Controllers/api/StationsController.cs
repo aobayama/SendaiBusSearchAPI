@@ -12,9 +12,9 @@ namespace SendaiBusSearchAPI.Controllers.api
     /// <summary>
     /// 駅情報に関するAPIを提供します。
     /// </summary>
-    [RoutePrefix("api/stations")]
+    [Route("stations")]
     [EnableCors(origins: "*", headers: "*", methods: "*")]
-    public class StationsController : ApiController
+    public class StationsControllerBase : ApiController
     {
         /// <summary>
         /// 駅詳細情報を検索します。
@@ -23,8 +23,8 @@ namespace SendaiBusSearchAPI.Controllers.api
         /// <param name="line_id">（オプション）一意の路線IDを指定して、時刻表データを制限します。</param>
         /// <returns></returns>
         [HttpGet()]
-        [Route("details")]
-        public StationInfoResult GetDetailsData(string id, string line_id = null)
+        [ActionName("details")]
+        public virtual StationInfoResult GetDetailsData(string id, string line_id = null)
         {
             var instance = DBModel.GetInstance();
 
@@ -93,8 +93,8 @@ namespace SendaiBusSearchAPI.Controllers.api
         /// <param name="id">一意の駅IDを指定します。</param>
         /// <returns></returns>
         [HttpGet()]
-        [Route("summary")]
-        public StationSummaryInfo GetSummaryData(string id)
+        [ActionName("summary")]
+        public virtual StationSummaryInfo GetSummaryData(string id)
         {
             var instance = DBModel.GetInstance();
 
@@ -132,8 +132,8 @@ namespace SendaiBusSearchAPI.Controllers.api
         /// </summary>
         /// <returns></returns>
         [HttpGet()]
-        [Route("list")]
-        public List<StationBasicInfo> GetAllBasicData()
+        [ActionName("list")]
+        public virtual List<StationBasicInfo> GetAllBasicData()
         {
             var instance = DBModel.GetInstance();
 
@@ -155,8 +155,8 @@ namespace SendaiBusSearchAPI.Controllers.api
         /// <param name="name">駅名を指定します。</param>
         /// <returns></returns>
         [HttpGet()]
-        [Route("search")]
-        public List<StationIdNamePair> SearchStationId(string name)
+        [ActionName("search")]
+        public virtual List<StationIdNamePair> SearchStationId(string name)
         {
             // 純粋にcontainsで
             var instance = DBModel.GetInstance();

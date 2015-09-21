@@ -12,9 +12,9 @@ namespace SendaiBusSearchAPI.Controllers.api
     /// <summary>
     /// 経路検索に関するAPIを提供します。
     /// </summary>
-    [RoutePrefix("api/route")]
+    [Route("route")]
     [EnableCors(origins: "*", headers: "*", methods: "*")]
-    public class RouteController : ApiController
+    public class RouteControllerBase : ApiController
     {
 
         /// <summary>
@@ -28,8 +28,8 @@ namespace SendaiBusSearchAPI.Controllers.api
         /// <param name="count">（オプション）検索結果の最大数を指定します。</param>
         /// <returns></returns>
         [HttpGet()]
-        [Route("search")]
-        public RouteSearchResult SearchRoute(string from, string to, DayType daytype,RouteSeachMethod method = RouteSeachMethod.DepartureBase, string queryTime = null, int count = 5)
+        [ActionName("search")]
+        public virtual RouteSearchResult SearchRoute(string from, string to, DayType daytype,RouteSeachMethod method = RouteSeachMethod.DepartureBase, string queryTime = null, int count = 5)
         {
             var instance = DBModel.GetInstance();
             
@@ -179,8 +179,8 @@ namespace SendaiBusSearchAPI.Controllers.api
         /// <param name="daytype">運行日を指定します。</param>
         /// <returns></returns>
         [HttpGet()]
-        [Route("search_all")]
-        public RouteSearchResult SearchRoute(string from, string to, DayType daytype)
+        [ActionName("search_all")]
+        public virtual RouteSearchResult SearchRoute(string from, string to, DayType daytype)
         {
             var instance = DBModel.GetInstance();
             var fromStation = instance.Stations.Where(c => c.Key == from).Select(c => c.Value).SingleOrDefault();
