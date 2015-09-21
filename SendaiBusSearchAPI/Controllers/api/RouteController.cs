@@ -59,7 +59,10 @@ namespace SendaiBusSearchAPI.Controllers.api
             var result = new RouteSearchResult()
             {
                 FromStation = new StationIdNamePair() { Id = from, Name = fromStation.Name, Yomi = fromStation.Yomi },
-                ToStation = new StationIdNamePair() { Id = to, Name = toStation.Name, Yomi = toStation.Yomi }
+                ToStation = new StationIdNamePair() { Id = to, Name = toStation.Name, Yomi = toStation.Yomi },
+                QueryDayType = daytype,
+                QueryMethod = method,
+                QueryTime = Commons.ConvertToString(baseTime)
             };
             
             IEnumerable<Tuple<BusDeptTimeInfo, BusDeptTimeInfo>> tempSource = null;
@@ -80,7 +83,7 @@ namespace SendaiBusSearchAPI.Controllers.api
             var tempRoute = (from busSet in tempSource
                               let bus = instance.Buses[busSet.Item1.BusId]
                               let line = instance.Lines.GetDataFromDayType(daytype)[bus.LineId]
-                              where line.Stations.IndexOf(@from) < line.Stations.IndexOf(to) select busSet);
+                              where line.Stations.IndexOf(@from) < line.Stations.IndexOf(to) select new Tuple<BusDeptTimeInfo,BusDeptTimeInfo,Bus,Line>(busSet.Item1,busSet.Item2, bus, line));
 
             // 提案コスト検索
             IEnumerable<Route> tempResult = null;
@@ -101,7 +104,7 @@ namespace SendaiBusSearchAPI.Controllers.api
                                                DeptNode = new Node() { Station = result.FromStation, Time = route.Item1.DeptTime },
                                                ArrNode = new Node() { Station = result.ToStation, Time = route.Item2.DeptTime },
                                                Method = TransferMethod.Bus,
-                                               LineId = instance.Buses[route.Item1.BusId].LineId,
+                                               Line = new LineNameInfo() { Id = route.Item3.LineId, Name = route.Item4.Name, Number = route.Item4.Number },
                                                BusId = route.Item1.BusId,
                                                Time = costTimeStr
                                            }
@@ -135,7 +138,7 @@ namespace SendaiBusSearchAPI.Controllers.api
                                                DeptNode = new Node() { Station = result.FromStation, Time = route.Item1.DeptTime },
                                                ArrNode = new Node() { Station = result.ToStation, Time = route.Item2.DeptTime },
                                                Method = TransferMethod.Bus,
-                                               LineId = instance.Buses[route.Item1.BusId].LineId,
+                                               Line = new LineNameInfo() { Id = route.Item3.LineId, Name = route.Item4.Name, Number = route.Item4.Number },
                                                BusId = route.Item1.BusId,
                                                Time = costTimeStr
                                            }
@@ -187,7 +190,8 @@ namespace SendaiBusSearchAPI.Controllers.api
             var result = new RouteSearchResult()
             {
                 FromStation = new StationIdNamePair() { Id = from, Name = fromStation.Name, Yomi = fromStation.Yomi },
-                ToStation = new StationIdNamePair() { Id = to, Name = toStation.Name, Yomi = toStation.Yomi }
+                ToStation = new StationIdNamePair() { Id = to, Name = toStation.Name, Yomi = toStation.Yomi },
+                QueryDayType = daytype
             };
 
 
@@ -207,7 +211,7 @@ namespace SendaiBusSearchAPI.Controllers.api
                                         DeptNode = new Node() { Station = result.FromStation, Time = busSet.From.DeptTime },
                                         ArrNode = new Node() { Station = result.ToStation, Time = busSet.To.DeptTime },
                                         Method = TransferMethod.Bus,
-                                        LineId = bus.LineId,
+                                        Line = new LineNameInfo() { Id = bus.LineId, Name = line.Name, Number = line.Number },
                                         BusId = busSet.From.BusId,
                                         Time = time
                                     }

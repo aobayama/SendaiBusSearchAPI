@@ -841,7 +841,7 @@
             到着点を示します。
             </summary>
         </member>
-        <member name="P:SendaiBusSearchAPI.Models.Path.LineId">
+        <member name="P:SendaiBusSearchAPI.Models.Path.Line">
             <summary>
             使用する路線IDを示します。
             </summary>
@@ -996,9 +996,9 @@
             駅出発時刻情報を示します。
             </summary>
         </member>
-        <member name="P:SendaiBusSearchAPI.Models.StationsDeptInfo.StationId">
+        <member name="P:SendaiBusSearchAPI.Models.StationsDeptInfo.Station">
             <summary>
-            駅IDを示します。
+            駅情報を示します。
             </summary>
         </member>
         <member name="P:SendaiBusSearchAPI.Models.StationsDeptInfo.DeptTime">

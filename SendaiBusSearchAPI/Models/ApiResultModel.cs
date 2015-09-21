@@ -329,8 +329,8 @@ namespace SendaiBusSearchAPI.Models
         /// <summary>
         /// 使用する路線IDを示します。
         /// </summary>
-        [JsonProperty("line_id")]
-        public string LineId { get; set; }
+        [JsonProperty("line")]
+        public LineNameInfo Line { get; set; }
 
         /// <summary>
         /// 使用するバスIDを示します。
